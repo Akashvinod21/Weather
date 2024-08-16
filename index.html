@@ -35,12 +35,12 @@
         }
 
         .card {
-            max-width: 600px;
+            width: 100%;
             background: transparent; 
             padding: 20px;
             border-radius: 10px;
             border-color: beige;
-            box-shadow: 40px 40px 40px rgba(240, 227, 227, 0.1);
+           
         }
 
        
@@ -55,36 +55,38 @@
             Your browser does not support the video tag.
         </video>
     
-
-   <div class="container">
-        <div class="row w-100 mt-5 p-4" style="height: 80vh;">
+        <div class="row w-100 align-items-center" style="height: 100vh">
             <div class="col-md-2"></div>
-    
-            <div class="col-md-10 d-flex align-items-center justify-content-center">
-                <div class="card  w-100 shadow"  id="colorCard">
+            <div class="col-md-8">
+                
                     <div class="row">
-                     
-                      <div class="col-md-12">
-                        <div class="card-body mt-1 p-5">
-                          <h5 class="card-title text-center fs-2 text-light">Weather Updates</h5>
-                       <form class="">
-                            <div class="d-flex">
-                                  <input type="text" class="form-control mt-4 shadow w-50" id="weather">
-                                  <button type="button" class="ms-auto mt-4 rounded-2 shadow btn btn-outline-light"  onclick="search()">Search</button>
+                       <div class="col-md-2"></div>
+                       <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card shadow p-4">
+                                <div class="card-body mt-1 p-5 ">
+                                  <h5 class="card-title text-center fs-2 text-light">Weather Updates</h5>
+                               <form class="">
+                                    <div class="d-flex">
+                                          <input type="text" class="form-control mt-4 shadow w-50 bg-transparent" id="weather">
+                                          <button type="button" class="ms-auto mt-4 rounded-2 shadow btn btn-outline-light"  onclick="search()">Search</button>
+                                    </div>
+                               </form>
+                                  <div class="row w-100 d-flex align-items-center justify-content-center" id="result">
+                                </div>
+                              </div>
                             </div>
-                       </form>
-                          <div class="row w-100 d-flex align-items-center justify-content-center" id="result">
-                        
-                         
+                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>    
+                       <div class="col-md-2"></div>
+                      </div>    
+                
+        
             </div>
-    
-            <div class="col-md-2" ></div>
-        </div>  
-   </div>
+            <div class="col-md-2"></div>
+        </div>
+   
 </body>
 <script>
     const search=async()=>{
@@ -116,23 +118,25 @@
             console.log(wp);
 
             result.innerHTML=`
-                <div class="col-md-8 col-sm-12  mt-5 text-center" style="background: transparent">
-                           <div class="bg-success">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item fs-1">${name}</li>
-                                    <li class="list-group-item  fs-2">${temp}°C</li>
-                                    <li class="list-group-item fs-3 ">${des}</li>
+                <div class="col-md-8 col-sm-12  mt-5 text-center">
+                           <div class="bg-transparent rounded shadow">
+                                
+                                    <p class="list-group-item fs-1">${name}</p>
+                                    <p class="list-group-item  fs-2">${temp}°C</p>
+                                    <p class="list-group-item fs-3 ">${des}</p>
                                    
-                                  </ul>
+                                  
                            </div>
                         </div>
-                        <div class="col-md-4 col-sm-12 mt-5 p-3 text-center">
-                            <ul class="list-group list-group-flush bg-success rounded">
-                                <li class="list-group-item  fs-4">Pressure:${pressure}</li>
-                                <li class="list-group-item fs-4 ">Humidity:${humidity}</li>
-                                <li class="list-group-item   fs-4">Wind Speed:${wp}</li>
+                        <div class="col-md-4 col-sm-12 mt-5 text-center w-100 p-4">
+                            
+                                <div class="bg-transparent rounded shadow">
+                                    <p class="list-group-item  fs-4">Pressure:${pressure}</p>
+                                    <p class="list-group-item fs-4 ">Humidity:${humidity}</p>
+                                    <p class="list-group-item   fs-4">Wind Speed:${wp}</p>
+                                </div>
                                
-                              </ul>
+                              
                         </div>
                       </div>
             `
