@@ -69,7 +69,7 @@
                                   <h5 class="card-title text-center fs-2 text-light">Weather Updates</h5>
                                <form class="">
                                     <div class="d-flex">
-                                          <input type="text" class="form-control mt-4 shadow w-50 bg-transparent" id="weather">
+                                          <input type="text" class="form-control mt-4 shadow w-50 bg-transparent text-light" id="weather">
                                           <button type="button" class="ms-auto mt-4 rounded-2 shadow btn btn-outline-light"  onclick="search()">Search</button>
                                     </div>
                                </form>
@@ -119,21 +119,21 @@
 
             result.innerHTML=`
                 <div class="col-md-8 col-sm-12  mt-5 text-center">
-                           <div class="bg-transparent rounded shadow">
+                           <div class="bg-dark rounded shadow opacity-75">
                                 
-                                    <p class="list-group-item fs-1">${name}</p>
-                                    <p class="list-group-item  fs-2">${temp}°C</p>
-                                    <p class="list-group-item fs-3 ">${des}</p>
+                                    <p class="list-group-item fs-1 text-light">${name}</p>
+                                    <p class="list-group-item  fs-2 text-light">${temp}°C</p>
+                                    <p class="list-group-item fs-3 text-light">${des}</p>
                                    
                                   
                            </div>
                         </div>
                         <div class="col-md-4 col-sm-12 mt-5 text-center w-100 p-4">
                             
-                                <div class="bg-transparent rounded shadow">
-                                    <p class="list-group-item  fs-4">Pressure:${pressure}</p>
-                                    <p class="list-group-item fs-4 ">Humidity:${humidity}</p>
-                                    <p class="list-group-item   fs-4">Wind Speed:${wp}</p>
+                                <div class="bg-dark rounded shadow opacity-75">
+                                    <p class="list-group-item  fs-4 text-light">Pressure:${pressure}</p>
+                                    <p class="list-group-item fs-4 text-light">Humidity:${humidity}</p>
+                                    <p class="list-group-item   fs-4 text-light">Wind Speed:${wp}</p>
                                 </div>
                                
                               
