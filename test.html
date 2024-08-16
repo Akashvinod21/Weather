@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- fontawsome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+     <!-- bootstrap -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    input{
+        height: 50px;
+        width: 300px;
+    }
+    button{
+        height: 50px;
+        width: 100px;
+    }
+    body{
+        padding: 0px;
+        background-image: url(https://t4.ftcdn.net/jpg/01/43/42/99/360_F_143429991_7gfhv3TH17KDcLPk5HmGH8rztg3hujTr.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+    ul{
+     background-color: black;
+     
+        
+    }
+     .card {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.8); /* Background color with transparency */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+     
+    
+</style>
+<body>
+    <div  class="row">
+       
+        
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            
+                <form  class=" mt-5">
+                    <input class="shadowed" type="text" placeholder="Enter a place" id="weather">
+                    <button class=" btn btn-success rounded ms-3" onclick="search()">search</button>
+                </form>
+            
+            <div class="row" id="result">
+               
+       
+                
+            </div>
+
+
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    
+</body>
+<script>
+    const search=async()=>{
+
+const resultDiv = document.getElementById('result');
+const colorCard = document.getElementById('colorCard');
+
+console.log(weather.value);
+const data=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weather.value}&appid=5fe36b192ffd1c36dffb6752bc1722b2`)
+data.json().then((response)=>{
+
+    let name=response.name
+    console.log(name);
+
+    let temp=response.main.temp
+    temp=Math.floor(temp-273.15)
+    console.log(temp);
+
+    let des=response.weather[0].main
+    console.log(des);
+
+    let pressure=response.main.pressure
+    console.log(pressure);
+
+    let humidity=response.main.humidity
+    console.log(humidity);
+
+    let wp=response.wind.speed
+    console.log(wp);
+    result.innerHTML=`
+     <div style="margin-top: 500px;" class="col-md-6 mt-5 ">
+                    <div style="height: 500px;" class="mt-5 bg-dark">      
+                        <ul class="list-group list-group-flush text-primary bg-dark ">
+                        <li class="list-group-item text-primary bg-dark fs-1">${name}</li>
+                        <li class="list-group-item text-primary bg-dark fs-2">${temp}°C</li>
+                        <li class="list-group-item text-primary bg-dark fs-3 ">${des}</li>             
+                       </ul>
+                   </div>
+                   
+
+                </div>
+                <div class="col-md-6">
+                    <div style="width: 100%; height: 550px;" class="mt-5 bg-dark">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary bg-dark  fs-4">Pressure:${pressure}</li>
+                            <li class="list-group-item text-primary bg-dark fs-4 ">Humidity:${humidity}</li>
+                            <li class="list-group-item text-primary bg-dark  fs-4">Wind Speed:${wp}</li>
+                           
+                          </ul>
+                    </div>
+                   
+                </div>
+    
+    `
+
+   
+    let videoSrc = '';
+ if (des == 'Clouds') {
+ videoSrc = 'https://cdn.pixabay.com/video/2020/05/06/38278-418005695_large.mp4'; // Replace with path to cold weather video
+ } else if (des == 'Mist') {
+ videoSrc = 'https://cdn.pixabay.com/video/2021/05/24/75034-554550709_large.mp4'; // Replace with path to mild weather video
+ } else if (des == 'Rain') {
+ videoSrc = 'https://cdn.pixabay.com/video/2023/08/05/174773-852018365_large.mp4'; // Replace with path to warm weather video
+ } else if(des == 'Haze') {
+ videoSrc = 'https://cdn.pixabay.com/video/2023/10/10/184487-873483993_large.mp4'; // Replace with path to hot weather video
+ }
+
+ const weatherVideo = document.getElementById('weatherVideo');
+         weatherVideo.src = videoSrc;
+         weatherVideo.play();
+
+})
+
+}
+</script>
+</html>

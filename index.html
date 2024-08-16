@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-color: rgb(206, 243, 243);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #weatherVideo {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+        }
+
+        .card {
+            max-width: 600px;
+            background: transparent; 
+            padding: 20px;
+            border-radius: 10px;
+            border-color: beige;
+            box-shadow: 40px 40px 40px rgba(240, 227, 227, 0.1);
+        }
+
+       
+        
+    </style>
+    <title>Weather Updates</title>
+</head>
+<body>
+    
+        <video id="weatherVideo" autoplay muted loop class="https://cdn.pixabay.com/video/2019/04/20/22908-331768732_tiny.mp4">
+            <source src="https://cdn.pixabay.com/video/2019/04/20/22908-331768732_tiny.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    
+
+   <div class="container">
+        <div class="row w-100 mt-5 p-4" style="height: 80vh;">
+            <div class="col-md-2"></div>
+    
+            <div class="col-md-10 d-flex align-items-center justify-content-center">
+                <div class="card  w-100 shadow"  id="colorCard">
+                    <div class="row">
+                     
+                      <div class="col-md-12">
+                        <div class="card-body mt-1 p-5">
+                          <h5 class="card-title text-center fs-2 text-light">Weather Updates</h5>
+                       <form class="">
+                            <div class="d-flex">
+                                  <input type="text" class="form-control mt-4 shadow w-50" id="weather">
+                                  <button type="button" class="ms-auto mt-4 rounded-2 shadow btn btn-outline-light"  onclick="search()">Search</button>
+                            </div>
+                       </form>
+                          <div class="row w-100 d-flex align-items-center justify-content-center" id="result">
+                        
+                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>    
+            </div>
+    
+            <div class="col-md-2" ></div>
+        </div>  
+   </div>
+</body>
+<script>
+    const search=async()=>{
+
+        const resultDiv = document.getElementById('result');
+        const colorCard = document.getElementById('colorCard');
+
+        console.log(weather.value);
+        const data=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${weather.value}&appid=5fe36b192ffd1c36dffb6752bc1722b2`)
+        data.json().then((response)=>{
+
+            let name=response.name
+            console.log(name);
+
+            let temp=response.main.temp
+            temp=Math.floor(temp-273.15)
+            console.log(temp);
+
+            let des=response.weather[0].main
+            console.log(des);
+
+            let pressure=response.main.pressure
+            console.log(pressure);
+
+            let humidity=response.main.humidity
+            console.log(humidity);
+
+            let wp=response.wind.speed
+            console.log(wp);
+
+            result.innerHTML=`
+                <div class="col-md-8 col-sm-12  mt-5 text-center" style="background: transparent">
+                           <div class="bg-success">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item fs-1">${name}</li>
+                                    <li class="list-group-item  fs-2">${temp}°C</li>
+                                    <li class="list-group-item fs-3 ">${des}</li>
+                                   
+                                  </ul>
+                           </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 mt-5 p-3 text-center">
+                            <ul class="list-group list-group-flush bg-success rounded">
+                                <li class="list-group-item  fs-4">Pressure:${pressure}</li>
+                                <li class="list-group-item fs-4 ">Humidity:${humidity}</li>
+                                <li class="list-group-item   fs-4">Wind Speed:${wp}</li>
+                               
+                              </ul>
+                        </div>
+                      </div>
+            `
+
+           
+      
+            let videoSrc = '';
+
+if (des == 'Clouds') {
+    videoSrc = 'https://cdn.pixabay.com/video/2020/05/06/38278-418005695_large.mp4'; 
+} else if (des == 'Mist') {
+    videoSrc = 'https://cdn.pixabay.com/video/2021/05/24/75034-554550709_large.mp4'; 
+} else if (des == 'Rain') {
+    videoSrc = 'https://cdn.pixabay.com/video/2023/08/05/174773-852018365_large.mp4'; 
+} else if(des == 'Haze') {
+    videoSrc = 'https://cdn.pixabay.com/video/2023/10/10/184487-873483993_large.mp4'; 
+}
+
+const weatherVideo = document.getElementById('weatherVideo');
+                weatherVideo.src = videoSrc;
+                weatherVideo.play();
+
+    })
+
+}
+
+     
+</script>
+</html>
